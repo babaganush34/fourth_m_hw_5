@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -6,12 +7,14 @@ import 'package:fourth_m_hw_5/ui/auth/auth_page.dart';
 import 'package:fourth_m_hw_5/ui/settings_page/theme_cubit/theme_cubit.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
+@RoutePage()
 class SettingsPage extends StatefulWidget {
   const SettingsPage({super.key});
 
   @override
   State<SettingsPage> createState() => _SettingsPageState();
 }
+
 
 class _SettingsPageState extends State<SettingsPage> {
   final FirebaseHelper _firebaseHelper = FirebaseHelper(

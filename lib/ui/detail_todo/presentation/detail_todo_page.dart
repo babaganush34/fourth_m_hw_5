@@ -1,8 +1,10 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fourth_m_hw_5/data/api/api_todos.dart';
-import 'package:fourth_m_hw_5/ui/bloc/todo_bloc.dart';
+import 'package:fourth_m_hw_5/state/bloc/todo_bloc.dart';
 
+@RoutePage()
 class DetailTodoPage extends StatefulWidget {
   const DetailTodoPage({super.key, required this.todoId});
 

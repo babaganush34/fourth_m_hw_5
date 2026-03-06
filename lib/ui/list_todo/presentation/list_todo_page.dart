@@ -1,12 +1,15 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:fourth_m_hw_5/data/api/api_todos.dart';
+import 'package:fourth_m_hw_5/router/app_router.gr.dart';
 import 'package:fourth_m_hw_5/ui/create_todo/create_todo_page.dart';
 import 'package:fourth_m_hw_5/ui/detail_todo/presentation/detail_todo_page.dart';
-import 'package:fourth_m_hw_5/ui/bloc/todo_bloc.dart';
+import 'package:fourth_m_hw_5/state/bloc/todo_bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fourth_m_hw_5/ui/settings_page/presentation/settings_page.dart';
 import 'package:fourth_m_hw_5/ui/update_todo/presentation/update_todo_page.dart';
 
+@RoutePage()
 class ListTodoPage extends StatefulWidget {
   const ListTodoPage({super.key});
 
@@ -30,10 +33,7 @@ class _ListTodoPageState extends State<ListTodoPage> {
         actions: [
           IconButton(
             onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (_) => SettingsPage()),
-              );
+              context.pushRoute(SettingsRoute());
             },
             icon: Icon(Icons.settings),
           ),
@@ -52,21 +52,11 @@ class _ListTodoPageState extends State<ListTodoPage> {
                   final todo = state.listTodosModel.todos[index];
                   return InkWell(
                     onLongPress: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (_) => UpdateTodoPage(todoModel: todo),
-                        ),
-                      );
+                      context.pushRoute(UpdateTodoRoute(todoModel: todo));
                     },
                     onTap: () {
                       if (todo.id != null) {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (_) => DetailTodoPage(todoId: todo.id!),
-                          ),
-                        );
+                        context.pushRoute(DetailTodoRoute(todoId: todo.id!));
                       }
                     },
                     child: Row(
@@ -106,10 +96,7 @@ class _ListTodoPageState extends State<ListTodoPage> {
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.create),
         onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => const CreateTodoPage()),
-          );
+          context.pushRoute(CreateTodoRoute());
         },
       ),
     );

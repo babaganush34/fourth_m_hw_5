@@ -1,9 +1,11 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fourth_m_hw_5/data/api/api_todos.dart';
 import 'package:fourth_m_hw_5/data/models/todo_model.dart';
-import 'package:fourth_m_hw_5/ui/bloc/todo_bloc.dart';
+import 'package:fourth_m_hw_5/state/bloc/todo_bloc.dart';
 
+@RoutePage()
 class CreateTodoPage extends StatefulWidget {
   const CreateTodoPage({super.key});
 
@@ -15,6 +17,7 @@ class _CreateTodoPageState extends State<CreateTodoPage> {
   final TodoBloc _todoBloc = TodoBloc(TodoApiService());
   final TextEditingController _textEditingController = TextEditingController();
   bool completed = false;
+  late final TodoModel todoModel;
 
   @override
   void initState() {
@@ -35,7 +38,7 @@ class _CreateTodoPageState extends State<CreateTodoPage> {
         child: BlocConsumer<TodoBloc, TodoState>(
           listener: (context, state) {
             if (state is SuccessCreateTodoState) {
-              Navigator.pop(context);
+              context.router.pop(true);
             }
           },
           bloc: _todoBloc,
@@ -81,6 +84,11 @@ class _CreateTodoPageState extends State<CreateTodoPage> {
                             userId: 142,
                           ),
                         ),
+                      );
+                      todoModel = TodoModel(
+                        todo: _textEditingController.text,
+                        completed: completed,
+                        userId: 142,
                       );
                     },
                     child: Text('Save'),
