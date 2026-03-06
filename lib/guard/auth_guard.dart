@@ -9,11 +9,11 @@ class AuthGuard extends AutoRouteGuard {
     NavigationResolver resolver,
     StackRouter router,
   ) async {
-    bool auth = await _checkUser();
-    if (!auth) {
-      resolver.next(true);
-    } else {
+    bool isAuth = await _checkUser();
+    if (isAuth) {
       router.push(ListTodoRoute());
+    } else {
+      resolver.next(true);
     }
   }
 

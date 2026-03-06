@@ -38,7 +38,7 @@ class _CreateTodoPageState extends State<CreateTodoPage> {
         child: BlocConsumer<TodoBloc, TodoState>(
           listener: (context, state) {
             if (state is SuccessCreateTodoState) {
-              context.router.pop(true);
+              context.router.pop(todoModel);
             }
           },
           bloc: _todoBloc,

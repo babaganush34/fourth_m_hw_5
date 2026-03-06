@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fourth_m_hw_5/data/api/firebase_helper.dart';
+import 'package:fourth_m_hw_5/router/app_router.gr.dart';
 import 'package:fourth_m_hw_5/ui/auth/auth_page.dart';
 import 'package:fourth_m_hw_5/ui/settings_page/theme_cubit/theme_cubit.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -14,7 +15,6 @@ class SettingsPage extends StatefulWidget {
   @override
   State<SettingsPage> createState() => _SettingsPageState();
 }
-
 
 class _SettingsPageState extends State<SettingsPage> {
   final FirebaseHelper _firebaseHelper = FirebaseHelper(
@@ -28,6 +28,8 @@ class _SettingsPageState extends State<SettingsPage> {
       MaterialPageRoute(builder: (_) => const AuthPage()),
       (route) => false,
     );
+    context.router.replaceAll([AuthRoute()]);
+    try {} catch (e) {}
   }
 
   @override

@@ -1,5 +1,4 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fourth_m_hw_5/data/api/firebase_helper.dart';
 import 'package:fourth_m_hw_5/router/app_router.gr.dart';
@@ -23,14 +22,6 @@ class _AuthPageState extends State<AuthPage> {
   void initState() {
     // _checkUser();
     super.initState();
-  }
-
-  void _checkUser() async {
-    final user = FirebaseAuth.instance.currentUser;
-    if (user != null) {
-      WidgetsBinding.instance.addPostFrameCallback((_) {});
-      _pushListTodo(context);
-    }
   }
 
   @override

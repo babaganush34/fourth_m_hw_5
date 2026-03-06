@@ -1,13 +1,10 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:fourth_m_hw_5/data/api/api_todos.dart';
+import 'package:fourth_m_hw_5/data/models/todo_model.dart';
 import 'package:fourth_m_hw_5/router/app_router.gr.dart';
-import 'package:fourth_m_hw_5/ui/create_todo/create_todo_page.dart';
-import 'package:fourth_m_hw_5/ui/detail_todo/presentation/detail_todo_page.dart';
 import 'package:fourth_m_hw_5/state/bloc/todo_bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:fourth_m_hw_5/ui/settings_page/presentation/settings_page.dart';
-import 'package:fourth_m_hw_5/ui/update_todo/presentation/update_todo_page.dart';
 
 @RoutePage()
 class ListTodoPage extends StatefulWidget {
@@ -95,8 +92,18 @@ class _ListTodoPageState extends State<ListTodoPage> {
       ),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.create),
-        onPressed: () {
-          context.pushRoute(CreateTodoRoute());
+        onPressed: () async {
+          final TodoModel? todoModel = await context.pushRoute(
+            CreateTodoRoute(),
+          );
+          if (todoModel != null) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text('${todoModel.todo} ${todoModel.completed}'),
+                duration: Duration(seconds: 2),
+              ),
+            );
+          }
         },
       ),
     );
